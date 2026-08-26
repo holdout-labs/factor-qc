@@ -50,7 +50,7 @@ configurations you tried. Without it there is no deflation benchmark
 ([Bailey & López de Prado 2014](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551)),
 no haircut ([Harvey, Liu & Zhu 2016, RFS](https://doi.org/10.1093/rfs/hhv059)),
 no track-record floor
-([Bailey & López de Prado 2018, JPM](https://ideas.repec.org/a/rsk/journl/0journalpm-v44n5.html))
+([Bailey & López de Prado 2012, JPM 39(1)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1821643))
 and no overfitting probability
 ([Bailey, Borwein, López de Prado & Zhu 2017, JCF](https://escholarship.org/uc/item/4w1110bb)).
 Refuse to declare, and the gate refuses to judge —that asymmetry is the
@@ -114,7 +114,7 @@ Flags: `--returns` (required), `--trials` (optional), `--n-trials`
 | `dsr` | P0 | Deflated Sharpe Ratio: P(SR > E[max SR of N trials]) under non-normal moments | [Bailey & López de Prado (2014), JPM 40(5)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551) |
 | `pbo` | P0 | Probability of Backtest Overfitting via Combinatorially-Symmetric Cross-Validation (12,870 splits at n_blocks=16) | [Bailey, Borwein, López de Prado & Zhu (2017), JCF](https://escholarship.org/uc/item/4w1110bb) |
 | `haircut_sharpe` | P0 | Multiple-testing haircut of the Sharpe ratio (Bonferroni/Holm/BHY) | [Harvey & Liu (2015)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2528780) |
-| `mintrl` | P0 | Minimum Track Record Length: observations needed before SR is significant | [Bailey & López de Prado (2018), JPM 44(5)](https://ideas.repec.org/a/rsk/journl/0journalpm-v44n5.html) |
+| `mintrl` | P0 | Minimum Track Record Length: observations needed before SR is significant | [Bailey & López de Prado (2012), JPM 39(1)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1821643) |
 | `psr_vs_zero` | P1 | Probabilistic Sharpe vs zero | [Bailey & López de Prado (2012)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2168747) |
 | `sample_length` | P1 | ≥252 observations | —|
 | `trial_aggression` | P1 | n_trials ≥n_obs / 5 | —|
