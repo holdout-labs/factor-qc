@@ -91,9 +91,19 @@ qc check --returns returns.json --trials trials.json --n-trials 200
 qc check --returns returns.json --n-trials 5 --json   # machine-readable
 ```
 
+Probability factors also carry evidence: judge predicted probabilities
+against observed outcomes (Brier skill / log loss / ECE, fail-closed):
+
+```bash
+qc calibrate --predicted probs.json --actual outcomes.json
+# -> PASS/FAIL/refuse; refuse = too few samples or degenerate outcomes
+qc calibrate --predicted probs.json --actual outcomes.json --json
+```
+
 Exit codes: `0` = no P0 failures (P1/P2 may still be failing), `1` = at
 least one P0 failure (or missing `n_trials`), `2` = usage error. Wire it
-into CI as a hard gate.
+into CI as a hard gate. `qc calibrate` exits `1` on FAIL/refuse and `0` on
+PASS.
 
 ## Commands
 

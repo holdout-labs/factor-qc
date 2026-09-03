@@ -2,8 +2,9 @@
 
 Subcommands:
 
-- ``check``   run the fail-closed gate on a returns series
-- ``version`` print version
+- ``check``      run the fail-closed gate on a returns series
+- ``calibrate``  judge probability predictions (Brier / log loss / ECE)
+- ``version``    print version
 """
 
 from __future__ import annotations
@@ -17,18 +18,19 @@ from typing import Any
 import numpy as np
 
 from . import __version__
+from .calibration import evaluate_calibration
 from .gate import run_gate
 
 
 def _load_returns(path: str) -> np.ndarray:
-    value = json.loads(Path(path).read_text(encoding="utf-8"))
+    value = json.loads(Path(path).read_text(encoding="utf-8-sig"))
     if not isinstance(value, list) or not all(isinstance(x, (int, float)) for x in value):
         raise ValueError(f"returns must be a JSON list of numbers: {path}")
     return np.asarray(value, dtype=float)
 
 
 def _load_trials(path: str) -> np.ndarray:
-    value = json.loads(Path(path).read_text(encoding="utf-8"))
+    value = json.loads(Path(path).read_text(encoding="utf-8-sig"))
     if not isinstance(value, list) or not value:
         raise ValueError(f"trials must be a non-empty JSON list of lists: {path}")
     rows = []
@@ -67,6 +69,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
     check.add_argument("--json", action="store_true", help="machine-readable output")
 
+    calibrate = sub.add_parser("calibrate", help="judge probability predictions (fail-closed)")
+    calibrate.add_argument("--predicted", required=True, help="JSON list of predicted probabilities [0,1]")
+    calibrate.add_argument("--actual", required=True, help="JSON list of binary outcomes (positive = up/1)")
+    calibrate.add_argument("--min-samples", type=int, default=30)
+    calibrate.add_argument("--skill-min", type=float, default=0.01)
+    calibrate.add_argument("--ece-max", type=float, default=0.05)
+    calibrate.add_argument("--bucket-count", type=int, default=5)
+    calibrate.add_argument("--json", action="store_true", help="machine-readable output")
+
     sub.add_parser("version", help="print version")
     return parser
 
@@ -98,6 +109,32 @@ def main(argv: list[str] | None = None) -> int:
             if body["report"] is not None:
                 print(body["report_text"])
             for check in body["checks"]:
+                marker = "PASS" if check["passed"] else "FAIL"
+                print(
+                    f" [{marker}] {check['severity']} {check['check_id']}: "
+                    f"{check['title']} (value={check['value']}, "
+                    f"threshold={check['threshold']})"
+                )
+        return 0 if body["passed"] else 1
+
+    if args.command == "calibrate":
+        predicted = _load_returns(args.predicted)
+        actual = _load_returns(args.actual)
+        body = evaluate_calibration(
+            predicted,
+            actual,
+            min_samples=args.min_samples,
+            skill_min=args.skill_min,
+            ece_max=args.ece_max,
+            bucket_count=args.bucket_count,
+        )
+        if args.json:
+            print(json.dumps(body, ensure_ascii=False, indent=2))
+        else:
+            print(body["verdict"])
+            if body.get("blockers"):
+                print(f"blockers: {', '.join(body['blockers'])}")
+            for check in body.get("checks") or []:
                 marker = "PASS" if check["passed"] else "FAIL"
                 print(
                     f" [{marker}] {check['severity']} {check['check_id']}: "
