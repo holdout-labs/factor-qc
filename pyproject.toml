@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "factor-qc"
-version = "0.1.2"
+version = "0.1.3"
 description = "Fail-closed quality gate for quantitative backtests: DSR, PBO, Harvey-Liu haircut, and MinTRL in one NumPy engine with P0/P1/P2 severity grading."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -19,7 +19,7 @@ Backtest Overfitting，CSCV）、Harvey-Liu 多重检验折减（haircut）和�
 评判不肯声明尝试过多少组配置的回测**。Python 3.11+，仅一个依赖（`numpy`），
 支持 Windows / Linux / macOS。
 
-**状态：** v0.1.1 alpha，已发布到 PyPI。这些统计量在生产研究流水线中经过
+**状态：** v0.1.3 alpha，已发布到 PyPI。这些统计量在生产研究流水线中经过
 实战检验，并对照已发表的参考值验证过，但这个独立包是新的：v1.0 之前 CLI
 可能会变动。
 

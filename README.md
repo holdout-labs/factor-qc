@@ -18,7 +18,7 @@ Harvey-Liu multiple-testing haircut and Minimum Track Record Length —graded P0
 how many configurations were tried**. Python 3.11+, one dependency
 (`numpy`), Windows / Linux / macOS.
 
-**Status:** v0.1.1 alpha, published on PyPI. The statistics are battle-tested inside a
+**Status:** v0.1.3 alpha, published on PyPI. The statistics are battle-tested inside a
 production research pipeline and validated against published reference
 values, but this standalone package is new: expect the CLI to shift before
 v1.0.

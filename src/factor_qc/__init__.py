@@ -18,7 +18,7 @@ from .stats import (
     skew_kurt,
 )
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 __all__ = [
     "build_check_artifact",
