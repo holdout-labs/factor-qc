@@ -5,6 +5,8 @@
 ![CI](https://github.com/holdout-labs/factor-qc/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
+> 收录于 [awesome-quant](https://github.com/wilsonfreitas/awesome-quant) —— 量化库精选清单（Factor Analysis 板块）。
+
 ## 中文说明
 
 `factor-qc` 是一个面向量化回测的质量闸门，也适用于 A 股因子研究。
