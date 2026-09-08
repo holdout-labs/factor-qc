@@ -7,6 +7,10 @@
 
 > Featured in [awesome-quant](https://github.com/wilsonfreitas/awesome-quant) — the curated list of quant libraries (Factor Analysis section).
 
+> Part of [Holdout](https://github.com/holdout-labs): open-source infrastructure for AI-assisted quantitative research. This tool owns the backtest-quality layer before an agent or researcher moves a claim forward.
+
+> 属于 Holdout：AI 辅助量化投研的开源基础设施。本工具负责回测质量层，先确认统计证据没有明显过拟合风险，再让 agent 或研究者继续推进结论。
+
 ## 中文说明
 
 `factor-qc` 是一个面向量化回测的质量闸门，也适用于 A 股因子研究。
